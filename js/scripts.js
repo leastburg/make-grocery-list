@@ -1,8 +1,11 @@
-//This is business logic.//
 
+//Ingredient Library
 const ingredientsVeggieSpringRolls = ["rice paper", "rice noodles", "cucumber", "carrot", "mixed greens", "avocado", "hoisin sauce", "peanut sauce"];
 const ingredientsPickledBeetSalad =  ["mixed greens", "pickled beets", "goat cheese", "sundried tomatoes", "red onion", "avocado", "olive oil", "balsamic vinegar", "cucumber"];
 
+//This is utility logic.//
+
+//This is business logic.//
 function displayIngredients(list) {
   let combinedIngredientsList = [];
   list.forEach(function(recipe) {
