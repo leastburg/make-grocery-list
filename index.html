@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <script src="js/jquery-3.6.0.js"></script>
+  <script src="js/scripts.js"></script>
+  <title>Make My Grocery List</title>
+</head>
+<body>
+  <div class ="container">
+    <div class="jumbotron">
+      <h2>Make My Grocery List</h2>
+    </div>
+    <form id="select-recipes">
+      <div class="form-group">
+        <p>Which of the following dishes would you like to shop for?</p>
+        <input type="checkbox" name="recipe-options" value="salad"> Salad<br>
+        <input type="checkbox" name="recipe-options" value="couscous"> Veggie CousCous<br>
+        <input type="checkbox" name="recipe-options" value="spring-rolls"> Veggie Spring Rolls<br>
+        <input type="checkbox" name="recipe-options" value="chipotle-chicken"> Chipotle Chicken<br>
+        <input type="checkbox" name="recipe-options"
+        value="buffalo-sliders"> Buffalo Chicken Sliders<br>
+      </div>
+      <button type="submit">Submit Selections</button>
+    </form>
+    <span id="grocery-list">
+      <p>
+
+      </p>
+    </span>
+  </div>
+</body>
+</html>
