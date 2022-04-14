@@ -10,15 +10,23 @@ function displayIngredients(list) {
   let combinedIngredientsList = [];
   list.forEach(function(recipe) {
     if (recipe === "spring-rolls") {
-      combinedIngredientsList = combinedIngredientsList.concat(ingredientsVeggieSpringRolls);
+      combineIdenticalInstances(ingredientsVeggieSpringRolls, combinedIngredientsList);
     } else if (recipe === "salad") {
-      combinedIngredientsList = combinedIngredientsList.concat(ingredientsPickledBeetSalad);
+      combineIdenticalInstances(ingredientsPickledBeetSalad, combinedIngredientsList);
     }
     return combinedIngredientsList;
   });
   console.log(combinedIngredientsList);
 }
 
+function combineIdenticalInstances(array, destinationArray) {
+  for (let i=0; i < array.length; i++) {
+    if (!destinationArray.includes(array[i])) {
+			destinationArray.push(array[i]);
+    }
+  }
+  console.log(destinationArray);
+}
 
 //This is user interface logic.//
 $(document).ready(function() {
