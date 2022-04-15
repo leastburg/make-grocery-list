@@ -1,7 +1,9 @@
+//This is VERSION 1.0
+
 
 //Ingredient Library
 const ingredientsPickledBeetSalad = [
-  ["1", "box","mixed greens"], 
+  ["1", "bag","mixed greens"], 
   ["1", "jar", "pickled beets"], 
   ["1", "log", "goat cheese"], 
   ["1", "jar", "sundried tomatoes"], 
@@ -14,7 +16,7 @@ const ingredientsPickledBeetSalad = [
 
 const ingredientsVeggieCousCous = [
   ["2", "tbsp", "olive oil"],
-  ["2", "cups", "couscous"],
+  ["1", "cups", "couscous"],
   ["2", "tbsp", "vegetable buillon"],
   ["2", "cups", "water or vegetable broth"],
   ["1", "tbsp", "cumin"],
@@ -22,7 +24,7 @@ const ingredientsVeggieCousCous = [
   ["1", "pinch", "salt"],
   ["1", "pinch", "pepper"],
   ["0.5", "tbsp", "cayenne"],
-  ["1", "cup", "lemon juice"],
+  ["0.5", "cup", "lemon juice"],
   ["1", "whole", "onion"],
   ["1", "whole", "eggplant"],
   ["2", "whole", "zuchini"],
@@ -36,8 +38,8 @@ const ingredientsVeggieSpringRolls = [
   ["1", "pack", "rice noodles"], 
   ["2", "whole", "cucumber"], 
   ["2", "whole", "carrot"], 
-  ["2", "box", "mixed greens"], 
-  ["3", "whole", "avocado"], 
+  ["1", "bag", "mixed greens"], 
+  ["2", "whole", "avocado"], 
   ["1", "bottle", "hoisin sauce"], 
   ["1", "bottle", "peanut sauce"]
 ];
@@ -68,7 +70,6 @@ const ingredientsChipotleChickenMarinade = [
 //This is utility logic.//
 
 //This is business logic.//
-
 function addUniqueIngredients(array, destinationArray) {
 	let comparisonArray = [];
 	for (let i=0; i < destinationArray.length; i++) {
@@ -129,7 +130,6 @@ function matchInputsToIngredientLists(list) {
       combinedRecipeLists.push(ingredientsBuffaloChickenSliders);
     }
   });
-  console.log("here is the combined ingredient lists " + combinedRecipeLists);
   return combinedRecipeLists;
 }
 
@@ -152,7 +152,7 @@ $(document).ready(function() {
 
     let matchedListsFromInputs = matchInputsToIngredientLists(selectedRecipesFromInputs);
     let groceryList = generateGroceryList(matchedListsFromInputs);
-    
+
     console.log(groceryList);
     displayGroceryList(groceryList);
     $('#select-recipes').hide();
