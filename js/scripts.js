@@ -29,7 +29,7 @@ const ingredientsVeggieCousCous = [
   ["2", "whole", "squash"],
   ["1", "cup", "cherry tomato"],
   ["6", "cloves", "garlic"],
-]
+];
 
 const ingredientsVeggieSpringRolls = [
   ["1", "box", "rice paper"], 
@@ -41,6 +41,29 @@ const ingredientsVeggieSpringRolls = [
   ["1", "bottle", "hoisin sauce"], 
   ["1", "bottle", "peanut sauce"]
 ];
+
+const ingredientsChipotleChickenMarinade = [
+  ["1", "tsp", "cumin powder"],
+  ["1", "tsp", "dried oregano"],
+  ["1", "tsp", "black pepper"],
+  ["2", "tsp", "kosher salt"],
+  ["1", "tbsp", "chili powder"],
+  ["2", "tbsp", "olive oil"],
+  ["4", "cloves", "garlic"],
+  ["7", "oz", "chipotle peppers in adobo sauce"],
+  [".75", "cup", "water"],
+  ["10", "boneless filets", "chicken"]
+]
+
+const ingredientsBuffaloChickenSliders = [
+  ["12", "full", "hawaiian rolls"],
+  ["1", "lb", "breaded chicken tenders"],
+  ["0.75", "cup", "buffalo wing sauce"],
+  ["6", "slices", "provolone cheese"],
+  [".25", "cup", "ranch dressing"],
+  ["2", "tbsp", "butter"],
+  ["2", "tbsp", "sesame seeds"]
+]
 
 //This is utility logic.//
 
@@ -96,7 +119,7 @@ function generateGroceryList(array) {
   return groceryList;
 }
 
-function gatherIngredientListsFromInputs(list) {
+function matchInputsToIngredientLists(list) {
   let combinedIngredientLists = [];
   list.forEach(function(recipe) {
     if (recipe === "salad") {
