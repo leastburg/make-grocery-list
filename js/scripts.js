@@ -1,16 +1,5 @@
 
 //Ingredient Library
-const ingredientsVeggieSpringRolls = [
-  ["1", "box", "rice paper"], 
-  ["1", "pack", "rice noodles"], 
-  ["2", "whole", "cucumber"], 
-  ["2", "whole", "carrot"], 
-  ["2", "box", "mixed greens"], 
-  ["3", "whole", "avocado"], 
-  ["1", "bottle", "hoisin sauce"], 
-  ["1", "bottle", "peanut sauce"]
-];
-
 const ingredientsPickledBeetSalad = [
   ["1", "box","mixed greens"], 
   ["1", "jar", "pickled beets"], 
@@ -23,89 +12,102 @@ const ingredientsPickledBeetSalad = [
   ["1", "whole", "cucumber"]
 ];
 
+const ingredientsVeggieCousCous = [
+  ["2", "tbsp", "olive oil"],
+  ["2", "cups", "couscous"],
+  []
+]
+
+const ingredientsVeggieSpringRolls = [
+  ["1", "box", "rice paper"], 
+  ["1", "pack", "rice noodles"], 
+  ["2", "whole", "cucumber"], 
+  ["2", "whole", "carrot"], 
+  ["2", "box", "mixed greens"], 
+  ["3", "whole", "avocado"], 
+  ["1", "bottle", "hoisin sauce"], 
+  ["1", "bottle", "peanut sauce"]
+];
+
 //This is utility logic.//
 
 //This is business logic.//
 
-
-function addUnlikeItems(array, destinationArray) {
+function addUniqueIngredients(array, destinationArray) {
 	let comparisonArray = [];
-  let duplicateIndexesOfArray = [];
 	for (let i=0; i < destinationArray.length; i++) {
   	comparisonArray.push(destinationArray[i][2]);
-    }
+  }
   for (let i=0; i < array.length; i++) {
-  	if (comparisonArray.includes(array[i][2])) {
-    	console.log(i);
-      duplicateIndexesOfArray.push(i);
-      console.log(duplicateIndexesOfArray);
-    } else {
-      destinationArray.push(array[i]);
+  	if (!comparisonArray.includes(array[i][2])) {
+    	destinationArray.push(array[i]);
     }
 	}
-  console.log(destinationArray);
   return(destinationArray);
 }
 
 
-function addLikeItems(array, destinationArray) {
+function combineSameIngredients(array, destinationArray) {
 	for (let i=0; i < array.length; i++) {
   	let finalMeasurement;
-    const fullIngredientData = array[i]
   	const ingredient = array[i][2];
     const ingredientMeasurement = parseInt(array[i][0]);
-  for (let i=0; i < destinationArray.length; i++) {
-    let listedIngredient = destinationArray[i][2];
-    if (ingredient === listedIngredient) {
-      console.log(ingredient, listedIngredient);
-      const listedIngredientMeasurement = parseInt(destinationArray[i][0]);
-      finalMeasurement = (ingredientMeasurement + listedIngredientMeasurement).toString();
-   		destinationArray[i].splice(0, 1, finalMeasurement);
-    } 
-  }
-  console.log(destinationArray);
+    for (let i=0; i < destinationArray.length; i++) {
+      let destinationIngredient = destinationArray[i][2];
+      if (ingredient === destinationIngredient) {
+        const destinationIngredientMeasurement = parseInt(destinationArray[i][0]);
+        finalMeasurement = (ingredientMeasurement + destinationIngredientMeasurement).toString();
+   		  destinationArray[i].splice(0, 1, finalMeasurement);
+      } 
+    }
   }
   return destinationArray;
 }
 
-function combineTwoArrays(array, destinationArray) {
-	const newArray = addLikeItems(array, destinationArray);
-  const ultimateArray = addUnlikeItems(array, newArray);
-  console.log(ultimateArray);
-  return ultimateArray;
+function combineTwoIngredientArrays(array, destinationArray) {
+	const initiateCombination = combineSameIngredients(array, destinationArray);
+  const finishedCombination = addUniqueIngredients(array, initiateCombination);
+  return finishedCombination;
 }
 
-const groceryList = combineTwoArrays(recipe1, recipe2);
-console.log(groceryList);
-   
+// const groceryList = combineTwoIngredientArrays(recipe1, recipe2);
+// console.log(groceryList);
 
 
 
+function generateGroceryList(array) {
+  let groceryList = [];
+  array.forEach(function(recipeList) {
+    combineTwoIngredientArrays(recipeList, groceryList);
+  })
+  return groceryList;
+}
 
+function gatherIngredientListsFromInputs(list) {
+  let combinedIngredientLists = [];
+  list.forEach(function(recipe) {
+    if (recipe === "salad") {
+      combinedIngredientsLists.push(ingredientsPickledBeetSalad);
+    } else if (recipe === "spring-rolls") {
+      combinedIngredientLists.push(ingredientsVeggieSpringRolls);
+    }
+  })
+}
 
 //THIS IS THE OLD CODE
 
-// function displayIngredients(list) {
-//   let combinedIngredientsList = [];
-//   list.forEach(function(recipe) {
-//     if (recipe === "spring-rolls") {
-//       combineIdenticalInstances(ingredientsVeggieSpringRolls, combinedIngredientsList);
-//     } else if (recipe === "salad") {
-//       combineIdenticalInstances(ingredientsPickledBeetSalad, combinedIngredientsList);
-//     }
-//     return combinedIngredientsList;
-//   });
-//   console.log(combinedIngredientsList);
-// }
-
-// function combineIdenticalInstances(array, destinationArray) {
-//   for (let i=0; i < array.length; i++) {
-//     if (!destinationArray.includes(array[i])) {
-// 			destinationArray.push(array[i]);
-//     }
-//   }
-//   console.log(destinationArray);
-// }
+function displayIngredients(list) {
+  let combinedIngredientsList = [];
+  list.forEach(function(recipe) {
+    if (recipe === "spring-rolls") {
+      combineIdenticalInstances(ingredientsVeggieSpringRolls, combinedIngredientsList);
+    } else if (recipe === "salad") {
+      combineIdenticalInstances(ingredientsPickledBeetSalad, combinedIngredientsList);
+    }
+    return combinedIngredientsList;
+  });
+  console.log(combinedIngredientsList);
+}
 
 //This is user interface logic.//
 $(document).ready(function() {
