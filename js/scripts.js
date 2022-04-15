@@ -15,7 +15,20 @@ const ingredientsPickledBeetSalad = [
 const ingredientsVeggieCousCous = [
   ["2", "tbsp", "olive oil"],
   ["2", "cups", "couscous"],
-  []
+  ["2", "tbsp", "vegetable buillon"],
+  ["2", "cups", "water or vegetable broth"],
+  ["1", "tbsp", "cumin"],
+  ["1", "tbsp", "paprika"],
+  ["1", "pinch", "salt"],
+  ["1", "pinch", "pepper"],
+  ["0.5", "tbsp", "cayenne"],
+  ["1", "cup", "lemon juice"],
+  ["1", "whole", "onion"],
+  ["1", "whole", "eggplant"],
+  ["2", "whole", "zuchini"],
+  ["2", "whole", "squash"],
+  ["1", "cup", "cherry tomato"],
+  ["6", "cloves", "garlic"],
 ]
 
 const ingredientsVeggieSpringRolls = [
