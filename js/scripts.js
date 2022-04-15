@@ -42,6 +42,16 @@ const ingredientsVeggieSpringRolls = [
   ["1", "bottle", "peanut sauce"]
 ];
 
+const ingredientsBuffaloChickenSliders = [
+  ["12", "full", "hawaiian rolls"],
+  ["1", "lb", "breaded chicken tenders"],
+  ["0.75", "cup", "buffalo wing sauce"],
+  ["6", "slices", "provolone cheese"],
+  [".25", "cup", "ranch dressing"],
+  ["2", "tbsp", "butter"],
+  ["2", "tbsp", "sesame seeds"]
+]
+
 const ingredientsChipotleChickenMarinade = [
   ["1", "tsp", "cumin powder"],
   ["1", "tsp", "dried oregano"],
@@ -53,16 +63,6 @@ const ingredientsChipotleChickenMarinade = [
   ["7", "oz", "chipotle peppers in adobo sauce"],
   [".75", "cup", "water"],
   ["10", "boneless filets", "chicken"]
-]
-
-const ingredientsBuffaloChickenSliders = [
-  ["12", "full", "hawaiian rolls"],
-  ["1", "lb", "breaded chicken tenders"],
-  ["0.75", "cup", "buffalo wing sauce"],
-  ["6", "slices", "provolone cheese"],
-  [".25", "cup", "ranch dressing"],
-  ["2", "tbsp", "butter"],
-  ["2", "tbsp", "sesame seeds"]
 ]
 
 //This is utility logic.//
@@ -106,64 +106,55 @@ function combineTwoIngredientArrays(array, destinationArray) {
   return finishedCombination;
 }
 
-// const groceryList = combineTwoIngredientArrays(recipe1, recipe2);
-// console.log(groceryList);
-
-
-
-function generateGroceryList(array) {
+function generateGroceryList(combinedRecipeLists) {
   let groceryList = [];
-  array.forEach(function(recipeList) {
-    combineTwoIngredientArrays(recipeList, groceryList);
+  combinedRecipeLists.forEach(function(ingredientList) {
+    combineTwoIngredientArrays(ingredientList, groceryList);
   })
   return groceryList;
 }
 
 function matchInputsToIngredientLists(list) {
-  let combinedIngredientLists = [];
+  let combinedRecipeLists = [];
   list.forEach(function(recipe) {
     if (recipe === "salad") {
-      combinedIngredientsLists.push(ingredientsPickledBeetSalad);
+      combinedRecipeLists.push(ingredientsPickledBeetSalad);
+    } else if (recipe === "couscous") {
+      combinedRecipeLists.push(ingredientsVeggieCousCous);
     } else if (recipe === "spring-rolls") {
-      combinedIngredientLists.push(ingredientsVeggieSpringRolls);
+      combinedRecipeLists.push(ingredientsVeggieSpringRolls);
+    } else if (recipe === "chipotle-chicken") {
+      combinedRecipeLists.push(ingredientsChipotleChickenMarinade);
+    } else if (recipe === "buffalo-sliders") {
+      combinedRecipeLists.push(ingredientsBuffaloChickenSliders);
     }
-  })
+  });
+  console.log("here is the combined ingredient lists " + combinedRecipeLists);
+  return combinedRecipeLists;
 }
 
-//THIS IS THE OLD CODE
-
-function displayIngredients(list) {
-  let combinedIngredientsList = [];
-  list.forEach(function(recipe) {
-    if (recipe === "spring-rolls") {
-      combineIdenticalInstances(ingredientsVeggieSpringRolls, combinedIngredientsList);
-    } else if (recipe === "salad") {
-      combineIdenticalInstances(ingredientsPickledBeetSalad, combinedIngredientsList);
-    }
-    return combinedIngredientsList;
-  });
-  console.log(combinedIngredientsList);
+function displayGroceryList(array2D) {
+  for(i=0; i < array2D.length; i++)
+  $("ul#grocery-list").append("<li>" + array2D[i][0] + " " + array2D[i][1] + " " + array2D[i][2] + "</li>");
 }
 
 //This is user interface logic.//
 $(document).ready(function() {
 
-  let recipeListArray = [];
-  
+  let selectedRecipesFromInputs = [];
   $("form#select-recipes").submit(function(event) {
     event.preventDefault();
-    $("#grocery-list").show();
+    $("ul#grocery-list").show();
     $("input:checkbox[name=recipe-options]:checked").each(function() {
-      recipeListArray.push($(this).val());
-
-      // const groceryList = $(this).val();
-      // console.log(groceryList);
-
-      // displayIngredients(groceryList);
-      // $('#grocery-list').append(groceryList + "<br>");
+      selectedRecipesFromInputs.push($(this).val());
+      return selectedRecipesFromInputs;
     });
-    console.log(recipeListArray);
-    displayIngredients(recipeListArray);
+
+    let matchedListsFromInputs = matchInputsToIngredientLists(selectedRecipesFromInputs);
+    let groceryList = generateGroceryList(matchedListsFromInputs);
+    
+    console.log(groceryList);
+    displayGroceryList(groceryList);
     $('#select-recipes').hide();
   });
 
